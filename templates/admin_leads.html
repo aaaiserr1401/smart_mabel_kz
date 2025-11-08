@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section class="container mx-auto px-4 py-8">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-semibold">Заявки</h1>
+    <div class="flex gap-2">
+      <a href="{{ url_for('admin_export_csv') }}" class="btn-outline">Экспорт CSV</a>
+      <a href="{{ url_for('admin_logout') }}" class="btn-outline">Выйти</a>
+    </div>
+  </div>
+
+  <div class="mt-4 text-sm text-slate-600">Всего: {{ total }}. Стр. {{ page }} из {{ pages }}.</div>
+
+  <div class="mt-4 overflow-x-auto border rounded">
+    <table class="min-w-full text-sm">
+      <thead class="bg-slate-50">
+        <tr>
+          <th class="text-left p-2 border-b">ID</th>
+          <th class="text-left p-2 border-b">Имя</th>
+          <th class="text-left p-2 border-b">Телефон</th>
+          <th class="text-left p-2 border-b">Комментарий</th>
+          <th class="text-left p-2 border-b">UTM</th>
+          <th class="text-left p-2 border-b">Ref</th>
+          <th class="text-left p-2 border-b">Создано</th>
+          <th class="text-left p-2 border-b">Статус</th>
+          <th class="text-left p-2 border-b">Действие</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for l in leads %}
+        <tr class="odd:bg-white even:bg-slate-50/50">
+          <td class="p-2 align-top border-b">{{ l['id'] }}</td>
+          <td class="p-2 align-top border-b">{{ l['name'] }}</td>
+          <td class="p-2 align-top border-b whitespace-nowrap"><a class="underline" href="tel:{{ l['phone'] }}">{{ l['phone'] }}</a></td>
+          <td class="p-2 align-top border-b max-w-md">{{ l['comment'] }}</td>
+          <td class="p-2 align-top border-b">{{ l['utm'] }}</td>
+          <td class="p-2 align-top border-b truncate max-w-[14rem]"><a class="underline" href="{{ l['referrer'] }}" target="_blank">{{ l['referrer'] }}</a></td>
+          <td class="p-2 align-top border-b whitespace-nowrap">{{ l['created_at'] }}</td>
+          <td class="p-2 align-top border-b">
+            <span class="tag {{ 'active' if l['status'] in ['in_progress','done'] else '' }}">{{ l['status'] }}</span>
+          </td>
+          <td class="p-2 align-top border-b">
+            <form action="{{ url_for('admin_lead_status', lead_id=l['id']) }}" method="post" class="flex items-center gap-2">
+              <select name="status" class="input">
+                <option value="new" {{ 'selected' if l['status']=='new' else '' }}>new</option>
+                <option value="in_progress" {{ 'selected' if l['status']=='in_progress' else '' }}>in_progress</option>
+                <option value="done" {{ 'selected' if l['status']=='done' else '' }}>done</option>
+                <option value="spam" {{ 'selected' if l['status']=='spam' else '' }}>spam</option>
+              </select>
+              <button type="submit" class="btn-primary">OK</button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9" class="p-4 text-center text-slate-500">Нет заявок</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-4 flex items-center justify-between">
+    <div>
+      <form method="get" class="inline-flex items-center gap-2">
+        <input type="hidden" name="page" value="1">
+        <label class="text-sm text-slate-600">На странице</label>
+        <select name="per_page" class="input" onchange="this.form.submit()">
+          {% for n in [10,20,50,100] %}
+          <option value="{{ n }}" {{ 'selected' if per_page==n else '' }}>{{ n }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+    <div class="flex gap-2">
+      {% if page > 1 %}
+      <a class="btn-outline" href="{{ url_for('admin_leads', page=page-1, per_page=per_page) }}">Назад</a>
+      {% endif %}
+      {% if page < pages %}
+      <a class="btn-outline" href="{{ url_for('admin_leads', page=page+1, per_page=per_page) }}">Вперёд</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

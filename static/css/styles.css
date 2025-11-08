@@ -1,0 +1,168 @@
+/* CTA button: subtle shine sweep every 3s */
+.btn-primary-glow{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.25rem;border-radius:.5rem;background:#E11D2E;color:#fff;font-weight:600;box-shadow:0 8px 24px rgba(225,29,46,.28);overflow:hidden;transition:transform .2s ease}
+.btn-primary-glow:hover{transform:translateY(-1px)}
+/* Shine stripe */
+.btn-primary-glow::before{content:"";position:absolute;top:-60%;bottom:-60%;left:-120%;width:60%;background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.7) 50%,transparent 100%);transform:translateX(0) skewX(-20deg);filter:blur(1px);opacity:.9;animation:btn-shine 3s linear infinite}
+/* Soft inner highlight */
+.btn-primary-glow::after{content:"";position:absolute;inset:0;border-radius:.5rem;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,0));pointer-events:none}
+@keyframes btn-shine{0%{transform:translateX(0) skewX(-20deg)}100%{transform:translateX(360%) skewX(-20deg)}}
+@media (prefers-reduced-motion: reduce){.btn-primary-glow{transition:none}.btn-primary-glow::before{animation:none}}
+
+/* Reuse shine effect on catalog CTA buttons */
+.btn-cta{position:relative;overflow:hidden}
+.btn-cta::before{content:"";position:absolute;top:-60%;bottom:-60%;left:-120%;width:60%;background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.7) 50%,transparent 100%);transform:translateX(0) skewX(-20deg);filter:blur(1px);opacity:.85;animation:btn-shine 3s linear infinite}
+.btn-cta::after{content:"";position:absolute;inset:0;border-radius:.5rem;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0));pointer-events:none}
+:root{scroll-behavior:smooth}
+.brand{--brand-primary:#0E4952;--brand-accent:#F6D2A2}
+.container{max-width:1100px}
+.input{padding:.75rem 1rem;border:1px solid #e5e7eb;border-radius:.5rem}
+.before-after{position:relative}
+.before-after img[data-after]{position:absolute;left:0;top:0;height:100%;width:100%;object-fit:cover}
+.ba-slider{position:absolute;inset:0;cursor:ew-resize}
+.ba-handle{position:absolute;top:0;transform:translateX(-50%);height:100%;width:2px;background:var(--brand-primary,#0E4952)}
+.tag{padding:.25rem .75rem;border:1px solid #e5e7eb;border-radius:9999px}
+.tag{transition:transform .16s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease}
+.tag:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(14,73,82,.08);border-color:var(--brand-primary,#0E4952)}
+.tag.active{background:var(--brand-primary,#0E4952);color:#fff;border-color:var(--brand-primary,#0E4952)}
+.card{border:1px solid #e5e7eb;border-radius:.75rem;overflow:hidden;background:#fff;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+.card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,0,0,.08);border-color:#e2e8f0}
+.card img{width:100%;height:220px;object-fit:contain;display:block;background:#f3f4f6}
+/* Aspect ratio helpers (16:9) */
+.aspect-video{position:relative;width:100%;}
+.aspect-video::before{content:"";display:block;padding-top:56.25%;}
+.aspect-video > *{position:absolute;inset:0;width:100%;height:100%;}
+.aspect-video{min-height:220px}
+/* Instagram gradient button */
+.ig-gradient{background:linear-gradient(45deg,#F58529,#FEDA77 35%,#DD2A7B 55%,#8134AF 75%,#515BD4);color:#fff;border:0}
+.ig-gradient:hover{filter:brightness(0.95)}
+/* YouTube preview */
+.yt{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000}
+.yt-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.05);z-index:1}
+.yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:9999px;border:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
+.yt-play::before{content:"";display:block;margin-left:4px;border-style:solid;border-width:10px 0 10px 16px;border-color:transparent transparent transparent #fff}
+.yt:hover .yt-play{background:rgba(0,0,0,.7)}
+
+/* Brand utilities */
+.text-brand{color:var(--brand-primary,#0E4952)}
+
+/* Header navigation links */
+header nav a{transition:color .16s ease, text-underline-offset .16s ease}
+header nav a:hover{color:var(--brand-primary,#0E4952);text-underline-offset:3px}
+
+/* Zones: visual separation between sections */
+.zone{position:relative;scroll-margin-top:84px}
+.zone::before{content:"";position:absolute;left:0;right:0;top:-1px;height:10px;background:linear-gradient(90deg,transparent,rgba(14,73,82,.18),transparent)}
+.zone-alt{background:#f8fafc}
+.zone-pad{padding-top:1.25rem;padding-bottom:1.25rem}
+.bg-brand{background:var(--brand-primary,#0E4952);color:#fff}
+.btn-primary{background:var(--brand-primary,#0E4952);color:#fff;padding:.75rem 1.25rem;border-radius:.5rem;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--brand-primary,#0E4952);position:relative;overflow:hidden;transition:transform .16s ease, filter .16s ease, box-shadow .16s ease}
+.btn-primary:hover{filter:brightness(0.98);box-shadow:0 8px 20px rgba(14,73,82,.18)}
+.btn-primary:active{transform:translateY(1px) scale(.99)}
+.btn-primary:focus-visible{outline:2px solid rgba(14,73,82,.5);outline-offset:2px}
+.btn-outline{background:#fff;color:var(--brand-primary,#0E4952);padding:.75rem 1.25rem;border-radius:.5rem;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--brand-primary,#0E4952);position:relative;overflow:hidden;transition:transform .16s ease, background .16s ease, box-shadow .16s ease}
+.btn-outline:hover{background:rgba(14,73,82,.06);box-shadow:0 6px 16px rgba(14,73,82,.12)}
+.btn-outline:active{transform:translateY(1px) scale(.99)}
+.btn-outline:focus-visible{outline:2px solid rgba(14,73,82,.35);outline-offset:2px}
+.border-brand{border-color:var(--brand-primary,#0E4952)!important}
+
+/* Red CTA button for catalog cards */
+.btn-cta{background:#E11D2E;color:#fff;padding:.5rem 1rem;border-radius:.5rem;border:1px solid #E11D2E;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(225,29,46,.35);position:relative;overflow:hidden;transition:transform .16s ease, filter .16s ease, box-shadow .16s ease}
+.btn-cta:hover{filter:brightness(0.98);box-shadow:0 10px 20px rgba(225,29,46,.28)}
+.btn-cta:active{transform:translateY(1px) scale(.99)}
+.btn-cta:focus-visible{outline:2px solid rgba(225,29,46,.45);outline-offset:2px}
+
+/* Ensure hero swiper slides show images */
+#hero-swiper{width:100%}
+#hero-swiper .swiper-wrapper{min-height:22rem;display:flex}
+#hero-swiper .swiper-slide{display:block;opacity:1!important;visibility:visible!important;position:relative;flex-shrink:0;width:100%!important}
+#hero-swiper .swiper-slide img{width:100%;height:22rem;object-fit:cover;display:block}
+
+/* Background-based hero slide helper */
+.hero-slide{height:22rem;width:100%;background-size:cover;background-position:center;background-repeat:no-repeat;display:block}
+
+/* Hero static image sizing */
+#hero-img{height:220px}
+@media (min-width:768px){#hero-img{height:260px}}
+@media (min-width:1024px){#hero-img{height:300px}}
+
+/* Before/After: same fixed height for all, a bit shorter */
+.before-after{height:18rem;background:transparent;border-radius:.5rem;overflow:hidden;position:relative}
+@media (min-width:768px){.before-after{height:19rem}}
+@media (min-width:1024px){.before-after{height:20rem}}
+.before-after img{width:100%;height:100%;object-fit:cover;background:transparent}
+
+/* Before/After UI (red line + round handle + badges) */
+.ba-slider{position:absolute;top:0;bottom:0;left:0;width:100%;cursor:ew-resize}
+.ba-slider::before{content:"";position:absolute;top:0;bottom:0;left:var(--ba-x,50%);width:3px;background:#0E4952 !important;transform:translateX(-50%);box-shadow:0 0 0 1px rgba(0,0,0,.04)}
+.ba-handle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:9999px;background:#fff;border:2px solid #0E4952 !important;box-shadow:0 6px 16px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center}
+.ba-handle::before,.ba-handle::after{content:"";display:inline-block;width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.ba-handle::before{border-right:8px solid #0E4952 !important;margin-right:6px}
+.ba-handle::after{border-left:8px solid #0E4952 !important;margin-left:6px}
+.ba-badge{position:absolute;top:10px;padding:.35rem .6rem;border-radius:.5rem;background:rgba(14,73,82,.65) !important;color:#fff !important;font-size:.85rem;box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.ba-badge.before{left:10px}
+.ba-badge.after{right:10px}
+
+/* Category badge overlay */
+.hero-badge{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.9);color:#0E4952;border:1px solid #e5e7eb;padding:.4rem .75rem;border-radius:.5rem;font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,.08)}
+
+/* Hide hero pagination dots */
+#hero-swiper .swiper-pagination{display:none}
+
+/* Catalog category cards (image + overlay text) */
+.cat-card{position:relative;border:1px solid #e5e7eb;border-radius:.75rem;overflow:hidden;background:#000;transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}
+.cat-card:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(0,0,0,.18);border-color:#e2e8f0}
+.cat-card .cat-bg{display:block;height:300px;width:100%;background-size:cover;background-position:center;background-repeat:no-repeat;filter:saturate(1.05)}
+.cat-card .cat-bg{transition:transform .5s cubic-bezier(.22,.61,.36,1), filter .3s ease}
+.cat-card:hover .cat-bg{transform:scale(1.03);filter:saturate(1.12)}
+.cat-card .cat-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.15))}
+.cat-card .cat-overlay{transition:background .2s ease}
+.cat-card:hover .cat-overlay{background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.18))}
+@media (min-width: 768px){
+  .cat-card .cat-bg{height:340px}
+}
+@media (min-width: 1024px){
+  .cat-card .cat-bg{height:380px}
+}
+.cat-card .cat-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.15))}
+.cat-card .cat-title{font-size:1.25rem;line-height:1.2;font-weight:600;text-align:center}
+.cat-card .cat-sub{margin-top:.25rem;font-size:.95rem;opacity:.95}
+
+/* Ripple effect */
+:where(.btn-primary,.btn-outline,.btn-cta,[data-quick-panel]>a,.btn-primary-glow){position:relative;overflow:hidden}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);opacity:.35;pointer-events:none;background:#fff;mix-blend-mode:overlay;animation:ripple .6s ease-out forwards}
+@keyframes ripple{to{transform:scale(12);opacity:0}}
+
+/* Floating quick contact panel animations */
+[data-quick-root]{isolation:isolate}
+[data-quick-toggle]{transition:transform .28s cubic-bezier(.22,.61,.36,1), box-shadow .28s ease}
+[data-quick-root].open [data-quick-toggle]{transform:rotate(90deg) scale(1.05);box-shadow:0 10px 24px rgba(14,73,82,.3)}
+
+[data-quick-panel]{
+  opacity:0;transform:translateY(8px);pointer-events:none;
+  transition:opacity .24s ease, transform .24s ease;
+}
+[data-quick-root].open [data-quick-panel]{
+  opacity:1;transform:none;pointer-events:auto;
+}
+
+[data-quick-panel] > a{
+  transform:translateX(8px) scale(.96);
+  opacity:0;
+  transition:transform .28s cubic-bezier(.22,.61,.36,1), opacity .28s ease, box-shadow .2s ease, background .16s ease;
+}
+[data-quick-panel] > a:hover{box-shadow:0 8px 18px rgba(14,73,82,.18);transform:translateX(2px)}
+[data-quick-root].open [data-quick-panel] > a{
+  transform:none;opacity:1;
+}
+/* Stagger reveal */
+[data-quick-root].open [data-quick-panel] > a:nth-child(1){transition-delay:40ms}
+[data-quick-root].open [data-quick-panel] > a:nth-child(2){transition-delay:80ms}
+[data-quick-root].open [data-quick-panel] > a:nth-child(3){transition-delay:120ms}
+[data-quick-root].open [data-quick-panel] > a:nth-child(4){transition-delay:160ms}
+[data-quick-root].open [data-quick-panel] > a:nth-child(5){transition-delay:200ms}
+
+@media (prefers-reduced-motion: reduce){
+  [data-quick-toggle]{transition:none}
+  [data-quick-panel]{transition:none}
+  [data-quick-panel] > a{transition:none}
+}

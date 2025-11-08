@@ -1,0 +1,394 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <!-- Hero -->
+  <section class="relative overflow-hidden zone">
+    <div class="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight">Мебель на заказ под ваш интерьер</h1>
+        <p class="mt-4 text-slate-600">Кухни, шкафы, гардеробные. Срок от 7 дней. Гарантия и доставка.</p>
+        <div class="mt-6 flex flex-wrap gap-3 items-center">
+          <button class="btn-cta" data-open-modal="#modal-quote" data-comment="Рассчитать стоимость за 1 минуту">Рассчитать стоимость за 1 минуту</button>
+          <a href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Вопрос по рассрочке Kaspi'|urlencode }}" target="_blank" rel="noopener" aria-label="Партнёр Kaspi"
+             class="inline-flex items-center gap-2.5 px-3.5 py-2.5 rounded-full bg-red-50/90 text-red-700 border border-red-200 hover:bg-red-100 hover:border-red-300 transition-colors shadow-sm">
+            <span class="font-medium">Сотрудничаем с</span>
+            <img src="{{ url_for('static', filename='img/brand/kaspi-new.png') }}" alt="Kaspi Bank" title="Kaspi Bank"
+                 class="h-8 md:h-9 w-auto object-contain" loading="lazy"
+                 onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/brand/kaspi.png') }}'">
+          </a>
+        </div>
+      </div>
+      <div class="relative">
+        <img class="rounded-lg shadow-lg w-full h-72 object-cover" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1600&auto=format&fit=crop" alt="mebel">
+      </div>
+    </div>
+  </section>
+
+  <!-- About & Advantages -->
+  <section id="about" class="container mx-auto px-4 py-16">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-semibold">Выполним заказ любой сложности из 18 видов материалов</h2>
+      <div class="mt-2 text-slate-600">(от ЛДСП до массива из дерева)</div>
+    </div>
+    <div class="mt-8 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+      <div class="p-4 border rounded text-center">
+        <div class="flex justify-center mb-2 text-brand">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="text-sm">Более <span class="font-semibold">2000</span> фактур и цветов</div>
+      </div>
+      <div class="p-4 border rounded text-center">
+        <div class="flex justify-center mb-2 text-brand">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l-3-3m0 0l3-3m-3 3h10M5 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="text-sm">Услуги дизайнера <span class="font-semibold">бесплатно</span></div>
+      </div>
+      <div class="p-4 border rounded text-center">
+        <div class="flex justify-center mb-2 text-brand">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 7h8M6 11h12M4 15h16M10 19h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="text-sm">Установка под ключ <span class="font-semibold">15–30</span> раб. дней</div>
+      </div>
+      <div class="p-4 border rounded text-center">
+        <div class="flex justify-center mb-2 text-brand">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 16l3-3 4 4 8-8 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="text-sm">Доставка, подъём и сборка <span class="font-semibold">бесплатно</span></div>
+      </div>
+      <div class="p-4 border rounded text-center col-span-2 md:col-span-1">
+        <div class="flex justify-center mb-2 text-brand">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="text-sm">Расширенная гарантия <span class="font-semibold">2 года</span></div>
+      </div>
+    </div>
+    <div class="mt-8 text-center">
+      <button class="btn-cta" data-open-modal="#modal-consult" data-product="Подбор материала">Подобрать материал под ваш бюджет</button>
+    </div>
+  </section>
+
+  <!-- Trust / Clients -->
+  <section id="trust" class="container mx-auto px-4 py-12 zone zone-alt">
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="text-2xl font-semibold">Нам доверяют</h2>
+        <ul class="mt-4 space-y-2 text-slate-700">
+          <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Работаем с 2012 года</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Имеем всю необходимую документацию</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Команда из 30 мастеров мебели</span></li>
+        </ul>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
+        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
+        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
+        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
+        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
+        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog (3 categories) -->
+  <section id="catalog" class="container mx-auto px-4 py-12 zone zone-alt">
+    <h2 class="text-2xl font-semibold">Каталог</h2>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="catalog-grid">
+      <div>
+        <div class="cat-card">
+          <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}');"></span>
+          <div class="cat-overlay">
+            <div class="cat-title">Кухни</div>
+            <div class="cat-sub">Цена по запросу</div>
+            <div class="mt-4">
+              <button class="btn-cta" data-open-modal="#modal-consult" data-product="Кухни">Получить консультацию!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="cat-card">
+          <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}');"></span>
+          <div class="cat-overlay">
+            <div class="cat-title">Шкафы</div>
+            <div class="cat-sub">Цена по запросу</div>
+            <div class="mt-4">
+              <button class="btn-cta" data-open-modal="#modal-consult" data-product="Шкафы">Получить консультацию!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="cat-card">
+          <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}');"></span>
+          <div class="cat-overlay">
+            <div class="cat-title">Офисная мебель</div>
+            <div class="cat-sub">Цена по запросу</div>
+            <div class="mt-4">
+              <button class="btn-cta" data-open-modal="#modal-consult" data-product="Офисная мебель">Получить консультацию!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before / After -->
+  <section id="beforeafter" class="container mx-auto px-4 py-16 md:py-20 zone">
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-semibold">Дарим профессиональный 3D‑эскиз бесплатно</h2>
+        <div class="mt-4 text-slate-700 space-y-2">
+          <div>Разработаем рабочий чертёж от "А" до "Я"</div>
+          <div class="text-slate-600">Плюс получите:</div>
+          <ul class="list-disc pl-5 text-slate-600 space-y-1">
+            <li>полный расчёт стоимости кухни по вашим параметрам;</li>
+            <li>советы по материалам, чтобы сэкономить без потери качества;</li>
+          </ul>
+        </div>
+        <div class="mt-6">
+          <button type="button" data-open-modal="#modal-consult" class="btn-primary-glow">Получить 3D бесплатно</button>
+        </div>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="relative before-after">
+          <img src="{{ url_for('static', filename='img/before/before-1.jpg') }}" alt="before" class="w-full h-full object-cover rounded">
+          <img src="{{ url_for('static', filename='img/after/after-1.jpg') }}" alt="after" class="w-full h-full object-cover rounded" data-after>
+          <span class="ba-badge before">До</span>
+          <span class="ba-badge after">После</span>
+        </div>
+        <div class="relative before-after">
+          <img src="{{ url_for('static', filename='img/before/before-2.jpg') }}" alt="before" class="w-full h-full object-cover rounded">
+          <img src="{{ url_for('static', filename='img/after/after-2.jpg') }}" alt="after" class="w-full h-full object-cover rounded" data-after>
+          <span class="ba-badge before">До</span>
+          <span class="ba-badge after">После</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video -->
+  <section id="video" class="container mx-auto px-4 py-16 md:py-20 zone zone-alt">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-24 md:gap-32">
+      <div>
+        <div class="aspect-video rounded-lg overflow-hidden shadow relative">
+          <div class="yt" data-ytid="HfWLgELllZs" data-ytnice="https://youtu.be/HfWLgELllZs?si=reSvkQBsViU9Me4s"></div>
+        </div>
+        <div class="mt-2 text-sm text-slate-600">
+          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="https://youtu.be/HfWLgELllZs?si=reSvkQBsViU9Me4s">Открыть на YouTube</a>
+        </div>
+        <div class="mt-4 flex gap-3 flex-wrap">
+          <a class="btn-cta" target="_blank" href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Вопрос по видео 1:'|urlencode }}">Задать вопрос по видео</a>
+        </div>
+      </div>
+      <div>
+        <div class="aspect-video rounded-lg overflow-hidden shadow relative">
+          <div class="yt" data-ytid="FOqKN-ouAUE" data-ytnice="https://youtu.be/FOqKN-ouAUE?si=GzAsCN8DgJq3gbWo"></div>
+        </div>
+        <div class="mt-2 text-sm text-slate-600">
+          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="https://youtu.be/FOqKN-ouAUE?si=GzAsCN8DgJq3gbWo">Открыть на YouTube</a>
+        </div>
+        <div class="mt-4 flex gap-3 flex-wrap">
+          <a class="btn-cta" target="_blank" href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Вопрос по видео 2:'|urlencode }}">Задать вопрос по видео</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews (slider) -->
+  <!-- Completed Projects -->
+  <section id="projects" class="container mx-auto px-4 py-16 md:py-20 zone">
+    <h2 class="text-2xl font-semibold">Выполненные проекты</h2>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" data-alt="Проект 1">
+          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" alt="Проект 1" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" data-alt="Проект 2">
+          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" alt="Проект 2" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" data-alt="Проект 3">
+          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" alt="Проект 3" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" data-alt="Проект 4">
+          <img src="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" alt="Проект 4" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" data-alt="Проект 5">
+          <img src="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" alt="Проект 5" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/projects/project-6.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/projects/project-6.jpg') }}" data-alt="Проект: белая угловая кухня">
+          <img src="{{ url_for('static', filename='img/projects/project-6.jpg') }}" alt="Проект: белая угловая кухня" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+    </div>
+    <div class="mt-4 text-center text-slate-600 text-sm">
+      Это лишь малая часть наших работ — в портфолио тысячи реализованных проектов.
+    </div>
+  </section>
+
+  <!-- Reviews (slider) -->
+  <section id="reviews" class="container mx-auto px-4 py-12 zone zone-alt">
+    <h2 class="text-2xl font-semibold">Отзывы</h2>
+    <div class="mt-6 swiper" id="reviews-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide p-4 border rounded bg-white">
+          <div class="flex items-center gap-3"><img class="w-12 h-12 rounded-full" src="https://i.pravatar.cc/100?img=12" alt=""><div class="font-medium">Алия</div></div>
+          <div class="mt-2 text-sm text-slate-600">Сделали кухню за неделю, всё отлично!</div>
+        </div>
+        <div class="swiper-slide p-4 border rounded bg-white">
+          <div class="flex items-center gap-3"><img class="w-12 h-12 rounded-full" src="https://i.pravatar.cc/100?img=32" alt=""><div class="font-medium">Ерлан</div></div>
+          <div class="mt-2 text-sm text-slate-600">Точные размеры, аккуратно, рекомендую.</div>
+        </div>
+        <div class="swiper-slide p-4 border rounded bg-white">
+          <div class="flex items-center gap-3"><img class="w-12 h-12 rounded-full" src="https://i.pravatar.cc/100?img=22" alt=""><div class="font-medium">Марина</div></div>
+          <div class="mt-2 text-sm text-slate-600">Качественные материалы, отличный сервис.</div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="container mx-auto px-4 py-16 md:py-20 zone">
+    <h2 class="text-2xl font-semibold">Часто задаваемые вопросы</h2>
+    <div class="mt-6 divide-y border rounded">
+      <details class="group p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Сколько лет вы на рынке?<span class="transition-transform group-open:rotate-180">▾</span></summary>
+        <div class="mt-2 text-slate-600">Мы работаем более 5 лет, имеем собственное производство и портфолио реализованных проектов.</div>
+      </details>
+      <details class="group p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Какие сроки изготовления?<span class="transition-transform group-open:rotate-180">▾</span></summary>
+        <div class="mt-2 text-slate-600">Обычно от 7 до 21 дня в зависимости от объема и сложности проекта.</div>
+      </details>
+      <details class="group p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Есть ли гарантия?<span class="transition-transform group-open:rotate-180">▾</span></summary>
+        <div class="mt-2 text-slate-600">Да, предоставляем официальную гарантию на изделия и фурнитуру.</div>
+      </details>
+      <details class="group p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Работаете по договору?<span class="transition-transform group-open:rotate-180">▾</span></summary>
+        <div class="mt-2 text-slate-600">Все работы ведем по договору, с прозрачными условиями и сроками.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Contacts & Map (address) -->
+  <section id="contacts" class="container mx-auto px-4 py-12 grid md:grid-cols-2 gap-8 items-start zone zone-alt">
+    <div>
+      <h2 class="text-2xl font-semibold">Контакты</h2>
+      <div class="mt-4 space-y-2">
+        <div>WhatsApp: <a class="hover:underline" href="https://wa.me/{{ whatsapp_number|replace('+','') }}">{{ whatsapp_number }}</a></div>
+        <div>Instagram: <a class="hover:underline" target="_blank" href="{{ instagram_url }}">@{{ instagram_handle }}</a></div>
+        <div>Адрес: <a class="hover:underline" target="_blank" rel="noopener" href="https://2gis.kz/almaty/geo/70000001099298757">Открыть в 2ГИС</a></div>
+      </div>
+    </div>
+    <div>
+      <div class="rounded overflow-hidden" style="height:380px">
+        <div class="dg-widget-link" style="display:none;"><a href="https://2gis.kz/almaty/geo/70000001099298757">Мы на карте</a></div>
+        <script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
+        <script>
+          new DGWidgetLoader({
+            width: '100%',
+            height: 380,
+            borderColor: '#e5e7eb',
+            pos: {lat: 43.238949, lon: 76.889709, zoom: 14},
+            opt: {city: 'almaty'},
+            org: [{id: '70000001099298757'}]
+          });
+        </script>
+        <noscript>Для отображения карты включите JavaScript</noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact form (submit) -->
+  <section id="contact" class="container mx-auto px-4 py-12">
+    <h2 class="text-2xl font-semibold">Оставить заявку</h2>
+    <form class="mt-4 grid gap-4 md:max-w-xl" action="{{ url_for('lead') }}" method="post">
+      <input type="text" name="name" placeholder="Ваше имя" class="input" required>
+      <input type="tel" name="phone" placeholder="Телефон" class="input" required>
+      <textarea name="comment" rows="4" placeholder="Комментарий" class="input"></textarea>
+      <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off">
+      <div class="mt-6 flex flex-wrap gap-3 items-center">
+        <a href="#contact" class="px-5 py-3 rounded-md bg-blue-600 text-white hover:bg-blue-700">Заказать</a>
+        <a href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Здравствуйте! Хочу заказать мебель.'|urlencode }}" class="px-5 py-3 rounded-md bg-green-600 text-white hover:bg-green-700">WhatsApp</a>
+      </div>
+      <button type="submit" class="px-5 py-3 rounded-md btn-primary">Отправить</button>
+      <a href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Здравствуйте! Хочу заказать мебель.'|urlencode }}" target="_blank" class="text-sm text-brand hover:underline">написать в WhatsApp</a>
+    </form>
+  </section>
+
+  <!-- CTA Modals (kept at end) -->
+  <div id="modal-callback" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="w-full max-w-md rounded bg-white p-6 shadow">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Заказать звонок</h3>
+        <button type="button" class="p-2" data-close-modal>✕</button>
+      </div>
+      <form class="mt-4 grid gap-3" action="{{ url_for('lead') }}" method="post">
+        <input type="text" name="name" placeholder="Ваше имя" class="input" required>
+        <input type="tel" name="phone" placeholder="Телефон" class="input" required>
+        <input type="text" name="comment" class="input" value="Заказать звонок" hidden>
+        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off">
+        <div class="flex justify-end gap-2">
+          <button type="button" class="px-4 py-2 border rounded" data-close-modal>Отмена</button>
+          <button type="submit" class="px-4 py-2 rounded btn-primary">Отправить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-quote" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="w-full max-w-md rounded bg-white p-6 shadow">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Узнать стоимость</h3>
+        <button type="button" class="p-2" data-close-modal>✕</button>
+      </div>
+      <form class="mt-4 grid gap-3" action="{{ url_for('lead') }}" method="post">
+        <input type="text" name="name" placeholder="Ваше имя" class="input" required>
+        <input type="tel" name="phone" placeholder="Телефон" class="input" required>
+        <textarea name="comment" rows="3" placeholder="Опишите задачу" class="input"></textarea>
+        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off">
+        <div class="flex justify-end gap-2">
+          <button type="button" class="px-4 py-2 border rounded" data-close-modal>Отмена</button>
+          <button type="submit" class="px-4 py-2 rounded btn-primary">Отправить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-consult" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+    <div class="w-full max-w-md rounded bg-white p-6 shadow">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Получить консультацию</h3>
+        <button type="button" class="p-2" data-close-modal>✕</button>
+      </div>
+      <form class="mt-4 grid gap-3" action="{{ url_for('lead') }}" method="post">
+        <input type="text" name="name" placeholder="Ваше имя" class="input" required>
+        <input type="tel" name="phone" placeholder="Телефон" class="input" required>
+        <textarea name="comment" rows="3" placeholder="Вопрос" class="input"></textarea>
+        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off">
+        <div class="flex justify-end gap-2">
+          <button type="button" class="px-4 py-2 border rounded" data-close-modal>Отмена</button>
+          <button type="submit" class="px-4 py-2 rounded btn-primary">Отправить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Generic image lightbox modal -->
+  <div id="modal-photo" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 p-4">
+    <div class="w-full max-w-5xl rounded bg-black/10 p-0 shadow flex items-center justify-center relative">
+      <button type="button" class="absolute top-4 right-4 p-2 text-white/90" data-close-modal aria-label="Закрыть">✕</button>
+      <img src="" alt="" class="max-h-[80vh] w-auto h-auto rounded shadow-lg">
+    </div>
+  </div>
+
+  {% endblock %}

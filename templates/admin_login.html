@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section class="container mx-auto px-4 py-12">
+  <h1 class="text-2xl font-semibold">Вход в админку</h1>
+  <form class="mt-6 max-w-sm grid gap-4" method="post">
+    <input type="password" name="password" placeholder="Пароль" class="input" required>
+    <button type="submit" class="btn-primary">Войти</button>
+  </form>
+  <div class="mt-4 text-sm text-slate-600">Пароль задаётся переменной окружения <code>ADMIN_PASSWORD</code>.</div>
+</section>
+{% endblock %}

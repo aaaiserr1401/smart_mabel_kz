@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section class="container mx-auto px-4 py-24 text-center">
+  <h1 class="text-3xl font-bold">Спасибо за заявку!</h1>
+  <p class="mt-2 text-slate-600">Мы свяжемся с вами в ближайшее время.</p>
+  <a href="/" class="mt-6 inline-block px-5 py-3 rounded-md border hover:bg-slate-50">На главную</a>
+  <a href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Здравствуйте! Я оставил(а) заявку на сайте.'|urlencode }}" class="mt-6 inline-block ml-2 px-5 py-3 rounded-md bg-green-600 text-white hover:bg-green-700">Написать в WhatsApp</a>
+</section>
+{% endblock %}
