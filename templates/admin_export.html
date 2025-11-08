@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section class="container mx-auto px-4 py-8">
+  <div class="flex items-center justify-between print:hidden">
+    <h1 class="text-2xl font-semibold">Экспорт заявок (таблица)</h1>
+    <div class="flex gap-2">
+      <a href="{{ url_for('admin_leads') }}" class="btn-outline">Назад</a>
+      <button onclick="window.print()" class="btn-primary">Печать / PDF</button>
+    </div>
+  </div>
+
+  <div class="mt-4 overflow-x-auto">
+    <table class="min-w-full text-sm border">
+      <thead class="bg-slate-50">
+        <tr>
+          <th class="text-left p-2 border">ID</th>
+          <th class="text-left p-2 border">Имя</th>
+          <th class="text-left p-2 border">Телефон</th>
+          <th class="text-left p-2 border">Комментарий</th>
+          <th class="text-left p-2 border">UTM</th>
+          <th class="text-left p-2 border">Referrer</th>
+          <th class="text-left p-2 border">Создано</th>
+          <th class="text-left p-2 border">Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for l in leads %}
+        <tr>
+          <td class="p-2 border align-top">{{ l['id'] }}</td>
+          <td class="p-2 border align-top">{{ l['name'] }}</td>
+          <td class="p-2 border align-top">{{ l['phone'] }}</td>
+          <td class="p-2 border align-top">{{ l['comment'] }}</td>
+          <td class="p-2 border align-top">{{ l['utm'] }}</td>
+          <td class="p-2 border align-top">{{ l['referrer'] }}</td>
+          <td class="p-2 border align-top">{{ l['created_at'] }}</td>
+          <td class="p-2 border align-top">{{ l['status'] }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="8" class="p-4 text-center text-slate-500">Нет данных</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+<style>
+  @media print {
+    header, footer, .print\:hidden, .print\:\!hidden { display: none !important; }
+    table { width: 100%; font-size: 12px; }
+  }
+</style>
+{% endblock %}

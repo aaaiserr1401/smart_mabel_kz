@@ -332,6 +332,30 @@ def admin_export_csv():
     return Response(generate(), mimetype='text/csv', headers={'Content-Disposition': 'attachment; filename=leads.csv'})
 
 
+@app.route('/admin/export')
+@login_required
+def admin_export_html():
+    conn = get_db()
+    if DATABASE_URL:
+        with conn:
+            rows = conn.execute('SELECT id, name, phone, comment, utm, referrer, created_at, status FROM leads ORDER BY created_at DESC').fetchall()
+        conn.close()
+    else:
+        cur = conn.cursor()
+        cur.execute('SELECT id, name, phone, comment, utm, referrer, created_at, status FROM leads ORDER BY created_at DESC')
+        rows = cur.fetchall()
+        conn.close()
+
+    return render_template(
+        'admin_export.html',
+        leads=rows,
+        whatsapp_number=app.config['WHATSAPP_NUMBER'],
+        instagram_handle=app.config['INSTAGRAM_HANDLE'],
+        instagram_url=app.config['INSTAGRAM_URL'],
+        site_domain=app.config['SITE_DOMAIN']
+    )
+
+
 if __name__ == '__main__':
     init_db()
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
