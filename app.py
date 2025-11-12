@@ -27,7 +27,7 @@ def get_db():
         dsn = DATABASE_URL
         try:
             if 'railway.internal' in dsn and 'sslmode=' not in dsn:
-                dsn = dsn + ('&sslmode=disable' if '?' in dsn else '?sslmode=disable')
+                dsn = dsn + ('&sslmode=require' if '?' in dsn else '?sslmode=require')
         except Exception:
             pass
         conn = psycopg.connect(dsn, row_factory=dict_row)

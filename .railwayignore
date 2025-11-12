@@ -1,0 +1,25 @@
+# Exclude large assets from CLI upload
+# Keep app code small to avoid 250MB limit
+
+# Videos and large media
+static/video/
+static/**/videos/
+*.mp4
+*.mov
+*.avi
+*.wmv
+*.webm
+
+# Heavy docs
+static/docs/
+*.pdf
+
+# Local sqlite db and logs
+site.db
+notify.log
+
+# VCS and envs
+.venv/
+.env
+.env.*
+.git/
