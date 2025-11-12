@@ -24,7 +24,13 @@ app.config['ADMIN_PASSWORD'] = os.environ.get('ADMIN_PASSWORD')
 
 def get_db():
     if DATABASE_URL:
-        conn = psycopg.connect(DATABASE_URL, row_factory=dict_row)
+        dsn = DATABASE_URL
+        try:
+            if 'railway.internal' in dsn and 'sslmode=' not in dsn:
+                dsn = dsn + ('&sslmode=disable' if '?' in dsn else '?sslmode=disable')
+        except Exception:
+            pass
+        conn = psycopg.connect(dsn, row_factory=dict_row)
         return conn
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
