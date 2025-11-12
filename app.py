@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import sqlite3
 from pathlib import Path
 from functools import wraps
@@ -8,6 +9,7 @@ import psycopg
 from psycopg.rows import dict_row
 
 BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR / '.env')
 DB_PATH = BASE_DIR / 'site.db'
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
@@ -109,20 +111,38 @@ def lead():
         return redirect(url_for('index'))
 
     conn = get_db()
-    if DATABASE_URL:
-        with conn:
+    try:
+        if DATABASE_URL:
+            try:
+                print('lead_store db=postgres')
+            except Exception:
+                pass
+            with conn:
+                conn.execute(
+                    'INSERT INTO leads (name, phone, comment, utm, referrer) VALUES (%s, %s, %s, %s, %s)',
+                    (name, phone, comment, utm, ref)
+                )
+        else:
+            try:
+                print('lead_store db=sqlite')
+            except Exception:
+                pass
             conn.execute(
-                'INSERT INTO leads (name, phone, comment, utm, referrer) VALUES (%s, %s, %s, %s, %s)',
+                'INSERT INTO leads (name, phone, comment, utm, referrer) VALUES (?, ?, ?, ?, ?)',
                 (name, phone, comment, utm, ref)
             )
-        conn.close()
-    else:
-        conn.execute(
-            'INSERT INTO leads (name, phone, comment, utm, referrer) VALUES (?, ?, ?, ?, ?)',
-            (name, phone, comment, utm, ref)
-        )
-        conn.commit()
-        conn.close()
+            conn.commit()
+    except Exception as e:
+        try:
+            print('lead_store_error', repr(e))
+        except Exception:
+            pass
+        raise
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
 
     token = os.environ.get('TELEGRAM_BOT_TOKEN')
     chat_id = os.environ.get('TELEGRAM_CHAT_ID')
@@ -136,7 +156,7 @@ def lead():
                 f"UTM: {utm or '-'}\n"
                 f"Referrer: {ref or '-'}"
             )
-            requests.post(
+            _tg_resp = requests.post(
                 f"https://api.telegram.org/bot{token}/sendMessage",
                 data={
                     'chat_id': chat_id,
@@ -144,6 +164,33 @@ def lead():
                 },
                 timeout=5
             )
+            try:
+                print('tg_send_status', _tg_resp.status_code)
+                try:
+                    with open(BASE_DIR / 'notify.log', 'a', encoding='utf-8') as _lf:
+                        _lf.write(f"tg_send_status {_tg_resp.status_code} {_tg_resp.text[:300]}\n")
+                except Exception:
+                    pass
+            except Exception:
+                pass
+        except Exception:
+            try:
+                print('tg_send_error')
+                try:
+                    with open(BASE_DIR / 'notify.log', 'a', encoding='utf-8') as _lf:
+                        _lf.write("tg_send_error\n")
+                except Exception:
+                    pass
+            except Exception:
+                pass
+    else:
+        try:
+            print('tg_env_missing')
+            try:
+                with open(BASE_DIR / 'notify.log', 'a', encoding='utf-8') as _lf:
+                    _lf.write("tg_env_missing\n")
+            except Exception:
+                pass
         except Exception:
             pass
 
@@ -357,5 +404,9 @@ def admin_export_html():
 
 
 if __name__ == '__main__':
+    try:
+        print(f"DB: {'PostgreSQL' if DATABASE_URL else 'SQLite'} | DATABASE_URL: {'set' if DATABASE_URL else 'empty'} | env_file: {BASE_DIR / '.env'}")
+    except Exception:
+        pass
     init_db()
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)

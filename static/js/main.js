@@ -284,17 +284,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
       const revEl = document.querySelector('#reviews-swiper');
+      let reviewsSwiper = null;
+      function setupReviews(){
+        if (!revEl) return;
+        const isDesktop = window.innerWidth >= 1024;
+        if (isDesktop) {
+          if (reviewsSwiper && typeof reviewsSwiper.destroy === 'function') {
+            reviewsSwiper.destroy(true, true);
+            reviewsSwiper = null;
+          }
+          revEl.classList.add('reviews-grid');
+        } else {
+          revEl.classList.remove('reviews-grid');
+          if (!reviewsSwiper && window.Swiper) {
+            reviewsSwiper = new Swiper(revEl, {
+              loop: true,
+              spaceBetween: 16,
+              autoplay: { delay: 4500, disableOnInteraction: false },
+              pagination: { el: revEl.querySelector('.swiper-pagination'), clickable: true },
+              slidesPerView: 1,
+              breakpoints: {
+                768: { slidesPerView: 2 },
+              },
+            });
+          }
+        }
+      }
       if (revEl) {
-        new Swiper(revEl, {
-          loop: true,
-          spaceBetween: 16,
-          autoplay: { delay: 4500, disableOnInteraction: false },
-          pagination: { el: revEl.querySelector('.swiper-pagination'), clickable: true },
-          slidesPerView: 1,
-          breakpoints: {
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          },
+        setupReviews();
+        // Re-evaluate on resize (debounced)
+        let rto;
+        window.addEventListener('resize', () => {
+          clearTimeout(rto);
+          rto = setTimeout(setupReviews, 150);
         });
       }
     }

@@ -2,29 +2,74 @@
 {% block content %}
   <!-- Hero -->
   <section class="relative overflow-hidden zone">
-    <div class="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
-      <div>
+    <div class="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-4 items-center">
+      <div class="relative z-10 md:-mr-16">
         <h1 class="text-3xl md:text-5xl font-bold leading-tight">Мебель на заказ под ваш интерьер</h1>
-        <p class="mt-4 text-slate-600">Кухни, шкафы, гардеробные. Срок от 7 дней. Гарантия и доставка.</p>
+        <p class="mt-4 text-slate-600 text-lg md:text-xl">Кухни, шкафы, гардеробные. Срок от 7 дней. Гарантия и доставка.</p>
+        <p class="mt-2 text-slate-600 text-lg md:text-xl">У нас производство 800 кв.м. полного цикла, без посредников</p>
         <div class="mt-6 flex flex-wrap gap-3 items-center">
           <button class="btn-cta" data-open-modal="#modal-quote" data-comment="Рассчитать стоимость за 1 минуту">Рассчитать стоимость за 1 минуту</button>
-          <a href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Вопрос по рассрочке Kaspi'|urlencode }}" target="_blank" rel="noopener" aria-label="Партнёр Kaspi"
-             class="inline-flex items-center gap-2.5 px-3.5 py-2.5 rounded-full bg-red-50/90 text-red-700 border border-red-200 hover:bg-red-100 hover:border-red-300 transition-colors shadow-sm">
-            <span class="font-medium">Сотрудничаем с</span>
+          <a href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Вопрос по рассрочке Kaspi'|urlencode }}" target="_blank" rel="noopener" aria-label="Kaspi" title="Рассрочка Kaspi — нажмите"
+             class="inline-flex items-center ml-6 md:ml-10 cursor-pointer transition-transform duration-200 hover:scale-105 drop-shadow-[0_6px_16px_rgba(255,75,75,0.35)] hover:drop-shadow-[0_10px_28px_rgba(255,75,75,0.45)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF4B4B]/60 rounded">
             <img src="{{ url_for('static', filename='img/brand/kaspi-new.png') }}" alt="Kaspi Bank" title="Kaspi Bank"
-                 class="h-8 md:h-9 w-auto object-contain" loading="lazy"
+                 class="h-10 md:h-12 w-auto object-contain" loading="lazy"
                  onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/brand/kaspi.png') }}'">
           </a>
         </div>
       </div>
-      <div class="relative">
-        <img class="rounded-lg shadow-lg w-full h-72 object-cover" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1600&auto=format&fit=crop" alt="mebel">
+      <div class="relative md:-ml-10">
+        <div class="relative aspect-video rounded-r-xl md:rounded-l-none overflow-hidden shadow-none" style="-webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 80px); mask-image: linear-gradient(to right, rgba(0,0,0,0) 0, #000 80px);">
+          <div id="hero-slide-a" class="absolute inset-0 bg-center bg-cover opacity-100 transition-opacity duration-700" style="transition: opacity 700ms ease, transform 3500ms ease; will-change: opacity, transform;"></div>
+          <div id="hero-slide-b" class="absolute inset-0 bg-center bg-cover opacity-0 transition-opacity duration-700" style="transition: opacity 700ms ease, transform 3500ms ease; will-change: opacity, transform;"></div>
+          <div class="absolute inset-0 bg-gradient-to-l from-black/50 via-black/20 to-transparent"></div>
+          <div class="absolute inset-y-0 left-0 w-32 md:w-56 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
+        </div>
       </div>
     </div>
   </section>
 
+  <script>
+    (function(){
+      var imgs = [
+        '{{ url_for('static', filename='img/hero/hero-1.jpg') }}',
+        '{{ url_for('static', filename='img/hero/hero-2.jpg') }}',
+        '{{ url_for('static', filename='img/hero/hero-3.jpg') }}',
+        '{{ url_for('static', filename='img/hero/hero-4.jpg') }}',
+        '{{ url_for('static', filename='img/hero/hero-5.jpg') }}'
+      ];
+      var a = document.getElementById('hero-slide-a');
+      var b = document.getElementById('hero-slide-b');
+      if(!a||!b) return;
+      var i = 0, frontA = true;
+      function setBg(el, url){ el.style.backgroundImage = 'url("'+url+'")'; }
+      setBg(a, imgs[0]);
+      // initial zoom on first slide
+      a.style.transform = 'scale(1.08)';
+      var preloaded = [];
+      for(var k=0;k<imgs.length;k++){ var im=new Image(); im.src=imgs[k]; preloaded.push(im); }
+      setInterval(function(){
+        i = (i + 1) % imgs.length;
+        var front = frontA ? a : b;
+        var back  = frontA ? b : a;
+        setBg(back, imgs[i]);
+        // reset zoom before swap
+        a.style.transform = 'scale(1)';
+        b.style.transform = 'scale(1)';
+        back.style.opacity = '0';
+        front.style.opacity = '1';
+        requestAnimationFrame(function(){
+          back.style.opacity = '1';
+          front.style.opacity = '0';
+          frontA = !frontA;
+          // apply zoom to the now-visible slide
+          var nowFront = frontA ? a : b;
+          nowFront.style.transform = 'scale(1.08)';
+        });
+      }, 3500);
+    })();
+  </script>
   <!-- About & Advantages -->
-  <section id="about" class="container mx-auto px-4 py-16">
+  <section id="about" class="container mx-auto px-4 py-16 zone">
     <div class="text-center max-w-3xl mx-auto">
       <h2 class="text-2xl md:text-3xl font-semibold">Выполним заказ любой сложности из 18 видов материалов</h2>
       <div class="mt-2 text-slate-600">(от ЛДСП до массива из дерева)</div>
@@ -46,7 +91,7 @@
         <div class="flex justify-center mb-2 text-brand">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 7h8M6 11h12M4 15h16M10 19h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
-        <div class="text-sm">Установка под ключ <span class="font-semibold">15–30</span> раб. дней</div>
+        <div class="text-sm">Установка под ключ <span class="font-semibold">5–30</span> раб. дней</div>
       </div>
       <div class="p-4 border rounded text-center">
         <div class="flex justify-center mb-2 text-brand">
@@ -66,6 +111,35 @@
     </div>
   </section>
 
+  <!-- Workshop Overview -->
+  <section id="workshop" class="container mx-auto px-4 py-16 md:py-20 zone">
+    <h2 class="text-2xl md:text-3xl font-semibold">Обзор цеха</h2>
+    <div class="mt-6 grid md:grid-cols-2 gap-8">
+      <div>
+        <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
+          <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
+            <source src="{{ url_for('static', filename='video/overviews/overview-1.mp4') }}" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+        </div>
+        <div class="mt-2 text-sm text-slate-600">
+          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="{{ url_for('static', filename='video/overviews/overview-1.mp4') }}">Скачать MP4</a>
+        </div>
+      </div>
+      <div>
+        <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
+          <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
+            <source src="{{ url_for('static', filename='video/overviews/overview-2.mp4') }}" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+        </div>
+        <div class="mt-2 text-sm text-slate-600">
+          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="{{ url_for('static', filename='video/overviews/overview-2.mp4') }}">Скачать MP4</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Trust / Clients -->
   <section id="trust" class="container mx-auto px-4 py-12 zone zone-alt">
     <div class="grid md:grid-cols-2 gap-10 items-start">
@@ -75,15 +149,16 @@
           <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Работаем с 2012 года</span></li>
           <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Имеем всю необходимую документацию</span></li>
           <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Команда из 30 мастеров мебели</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Производство полного цикла, все необходимые станки</span></li>
         </ul>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
-        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
-        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
-        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
-        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
-        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
-        <div class="border rounded-lg bg-white p-4 grid place-items-center h-24"><img class="max-h-12 opacity-80" src="https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO" alt="logo"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-1.png') }}" alt="logo 1" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-2.png') }}" alt="logo 2" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-3.png') }}" alt="logo 3" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-4.png') }}" alt="logo 4" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-5.png') }}" alt="logo 5" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-6.png') }}" alt="logo 6" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
       </div>
     </div>
   </section>
@@ -93,7 +168,7 @@
     <h2 class="text-2xl font-semibold">Каталог</h2>
     <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="catalog-grid">
       <div>
-        <div class="cat-card">
+        <div class="cat-card" role="button" tabindex="0" data-open-modal="#modal-catalog" data-category="kitchen">
           <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}');"></span>
           <div class="cat-overlay">
             <div class="cat-title">Кухни</div>
@@ -105,7 +180,7 @@
         </div>
       </div>
       <div>
-        <div class="cat-card">
+        <div class="cat-card" role="button" tabindex="0" data-open-modal="#modal-catalog" data-category="wardrobe">
           <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}');"></span>
           <div class="cat-overlay">
             <div class="cat-title">Шкафы</div>
@@ -117,7 +192,7 @@
         </div>
       </div>
       <div>
-        <div class="cat-card">
+        <div class="cat-card" role="button" tabindex="0" data-open-modal="#modal-catalog" data-category="office">
           <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}');"></span>
           <div class="cat-overlay">
             <div class="cat-title">Офисная мебель</div>
@@ -133,7 +208,7 @@
 
   <!-- Before / After -->
   <section id="beforeafter" class="container mx-auto px-4 py-16 md:py-20 zone">
-    <div class="grid md:grid-cols-2 gap-12 items-start">
+    <div class="grid md:grid-cols-2 gap-8 items-start">
       <div>
         <h2 class="text-2xl md:text-3xl font-semibold">Дарим профессиональный 3D‑эскиз бесплатно</h2>
         <div class="mt-4 text-slate-700 space-y-2">
@@ -148,7 +223,7 @@
           <button type="button" data-open-modal="#modal-consult" class="btn-primary-glow">Получить 3D бесплатно</button>
         </div>
       </div>
-      <div class="grid gap-6 sm:grid-cols-2">
+      <div class="grid gap-2 sm:grid-cols-2 min-w-0">
         <div class="relative before-after">
           <img src="{{ url_for('static', filename='img/before/before-1.jpg') }}" alt="before" class="w-full h-full object-cover rounded">
           <img src="{{ url_for('static', filename='img/after/after-1.jpg') }}" alt="after" class="w-full h-full object-cover rounded" data-after>
@@ -166,29 +241,25 @@
   </section>
 
   <!-- Video -->
-  <section id="video" class="container mx-auto px-4 py-16 md:py-20 zone zone-alt">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-24 md:gap-32">
-      <div>
-        <div class="aspect-video rounded-lg overflow-hidden shadow relative">
-          <div class="yt" data-ytid="HfWLgELllZs" data-ytnice="https://youtu.be/HfWLgELllZs?si=reSvkQBsViU9Me4s"></div>
-        </div>
-        <div class="mt-2 text-sm text-slate-600">
-          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="https://youtu.be/HfWLgELllZs?si=reSvkQBsViU9Me4s">Открыть на YouTube</a>
-        </div>
-        <div class="mt-4 flex gap-3 flex-wrap">
-          <a class="btn-cta" target="_blank" href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Вопрос по видео 1:'|urlencode }}">Задать вопрос по видео</a>
-        </div>
+  <section id="video" class="container mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
+        <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
+          <source src="{{ url_for('static', filename='video/insta/reel-1.mp4') }}" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
       </div>
-      <div>
-        <div class="aspect-video rounded-lg overflow-hidden shadow relative">
-          <div class="yt" data-ytid="FOqKN-ouAUE" data-ytnice="https://youtu.be/FOqKN-ouAUE?si=GzAsCN8DgJq3gbWo"></div>
-        </div>
-        <div class="mt-2 text-sm text-slate-600">
-          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="https://youtu.be/FOqKN-ouAUE?si=GzAsCN8DgJq3gbWo">Открыть на YouTube</a>
-        </div>
-        <div class="mt-4 flex gap-3 flex-wrap">
-          <a class="btn-cta" target="_blank" href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Вопрос по видео 2:'|urlencode }}">Задать вопрос по видео</a>
-        </div>
+      <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
+        <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
+          <source src="{{ url_for('static', filename='video/insta/reel-2.mp4') }}" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
+      <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
+        <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
+          <source src="{{ url_for('static', filename='video/insta/reel-3.mp4') }}" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
       </div>
     </div>
   </section>
@@ -230,29 +301,54 @@
       </div></div>
     </div>
     <div class="mt-4 text-center text-slate-600 text-sm">
-      Это лишь малая часть наших работ — в портфолио тысячи реализованных проектов.
+      Ещё больше информации по 
+      <a class="text-brand hover:underline" href="{{ url_for('static', filename='docs/gallery.pdf') }}" target="_blank" rel="noopener">ссылке</a>
+      или в 
+      <a class="text-brand hover:underline" href="{{ instagram_url }}" target="_blank" rel="noopener">Instagram</a>
     </div>
   </section>
 
   <!-- Reviews (slider) -->
   <section id="reviews" class="container mx-auto px-4 py-12 zone zone-alt">
     <h2 class="text-2xl font-semibold">Отзывы</h2>
-    <div class="mt-6 swiper" id="reviews-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide p-4 border rounded bg-white">
-          <div class="flex items-center gap-3"><img class="w-12 h-12 rounded-full" src="https://i.pravatar.cc/100?img=12" alt=""><div class="font-medium">Алия</div></div>
-          <div class="mt-2 text-sm text-slate-600">Сделали кухню за неделю, всё отлично!</div>
+    <div class="mt-6">
+      <div class="swiper" id="reviews-swiper">
+        <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
+          <div class="rounded-lg overflow-hidden shadow relative bg-black">
+            <video class="w-full h-auto object-contain" style="max-height:70vh" controls preload="metadata" playsinline>
+              <source src="{{ url_for('static', filename='video/reviews/review-1.mp4') }}" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
+          </div>
         </div>
-        <div class="swiper-slide p-4 border rounded bg-white">
-          <div class="flex items-center gap-3"><img class="w-12 h-12 rounded-full" src="https://i.pravatar.cc/100?img=32" alt=""><div class="font-medium">Ерлан</div></div>
-          <div class="mt-2 text-sm text-slate-600">Точные размеры, аккуратно, рекомендую.</div>
+        <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
+          <div class="rounded-lg overflow-hidden shadow relative bg-black">
+            <video class="w-full h-auto object-contain" style="max-height:70vh" controls preload="metadata" playsinline>
+              <source src="{{ url_for('static', filename='video/reviews/review-2.mp4') }}" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
+          </div>
         </div>
-        <div class="swiper-slide p-4 border rounded bg-white">
-          <div class="flex items-center gap-3"><img class="w-12 h-12 rounded-full" src="https://i.pravatar.cc/100?img=22" alt=""><div class="font-medium">Марина</div></div>
-          <div class="mt-2 text-sm text-slate-600">Качественные материалы, отличный сервис.</div>
+        <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
+          <div class="rounded-lg overflow-hidden shadow relative bg-black">
+            <video class="w-full h-auto object-contain" style="max-height:70vh" controls preload="metadata" playsinline>
+              <source src="{{ url_for('static', filename='video/reviews/review-3.mp4') }}" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
+          </div>
         </div>
+        <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
+          <div class="rounded-lg overflow-hidden shadow relative bg-black">
+            <video class="w-full h-auto object-contain" style="max-height:70vh" controls preload="metadata" playsinline>
+              <source src="{{ url_for('static', filename='video/reviews/review-4.mp4') }}" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
+          </div>
+        </div>
+        </div>
+        <div class="swiper-pagination"></div>
       </div>
-      <div class="swiper-pagination"></div>
     </div>
   </section>
 
@@ -261,12 +357,20 @@
     <h2 class="text-2xl font-semibold">Часто задаваемые вопросы</h2>
     <div class="mt-6 divide-y border rounded">
       <details class="group p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Есть ли у вас производство?<span class="transition-transform group-open:rotate-180">▾</span></summary>
+        <div class="mt-2 text-slate-600">Да. У нас собственное производство площадью 800 кв.м., полный цикл, без посредников.</div>
+      </details>
+      <details class="group p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Бесплатно ли у вас выезд и консультация?<span class="transition-transform group-open:rotate-180">▾</span></summary>
+        <div class="mt-2 text-slate-600">Да. Выезд замерщика и консультация дизайнера — бесплатно.</div>
+      </details>
+      <details class="group p-4">
         <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Сколько лет вы на рынке?<span class="transition-transform group-open:rotate-180">▾</span></summary>
-        <div class="mt-2 text-slate-600">Мы работаем более 5 лет, имеем собственное производство и портфолио реализованных проектов.</div>
+        <div class="mt-2 text-slate-600">Мы работаем более 13 лет, имеем собственное производство и портфолио реализованных проектов.</div>
       </details>
       <details class="group p-4">
         <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Какие сроки изготовления?<span class="transition-transform group-open:rotate-180">▾</span></summary>
-        <div class="mt-2 text-slate-600">Обычно от 7 до 21 дня в зависимости от объема и сложности проекта.</div>
+        <div class="mt-2 text-slate-600">Обычно от 5 дней в зависимости от объема и сложности проекта.</div>
       </details>
       <details class="group p-4">
         <summary class="flex cursor-pointer list-none items-center justify-between text-lg font-medium">Есть ли гарантия?<span class="transition-transform group-open:rotate-180">▾</span></summary>
@@ -309,23 +413,53 @@
   </section>
 
   <!-- Contact form (submit) -->
-  <section id="contact" class="container mx-auto px-4 py-12">
-    <h2 class="text-2xl font-semibold">Оставить заявку</h2>
-    <form class="mt-4 grid gap-4 md:max-w-xl" action="{{ url_for('lead') }}" method="post">
-      <input type="text" name="name" placeholder="Ваше имя" class="input" required>
-      <input type="tel" name="phone" placeholder="Телефон" class="input" required>
-      <textarea name="comment" rows="4" placeholder="Комментарий" class="input"></textarea>
-      <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off">
-      <div class="mt-6 flex flex-wrap gap-3 items-center">
-        <a href="#contact" class="px-5 py-3 rounded-md bg-blue-600 text-white hover:bg-blue-700">Заказать</a>
-        <a href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Здравствуйте! Хочу заказать мебель.'|urlencode }}" class="px-5 py-3 rounded-md bg-green-600 text-white hover:bg-green-700">WhatsApp</a>
+  <section id="contact" class="container mx-auto px-4 py-12 grid md:grid-cols-2 gap-8 items-start">
+    <div>
+      <h2 class="text-2xl font-semibold">Оставить заявку</h2>
+      <form class="mt-4 grid gap-4 md:max-w-xl" action="{{ url_for('lead') }}" method="post">
+        <input type="text" name="name" placeholder="Ваше имя" class="input" required>
+        <input type="tel" name="phone" placeholder="Телефон" class="input" required>
+        <textarea name="comment" rows="4" placeholder="Комментарий" class="input"></textarea>
+        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off">
+        <button type="submit" class="px-5 py-3 rounded-md btn-primary">Отправить</button>
+      </form>
+    </div>
+    <div class="space-y-4">
+      <div class="rounded-xl overflow-hidden shadow relative">
+        <img src="{{ url_for('static', filename='img/reviews/feedback-hero.jpg') }}" alt="Декор" class="w-full h-[260px] md:h-[320px] object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 right-4 text-white drop-shadow">
+          <div class="text-lg md:text-xl font-semibold">Идеи для вашего интерьера</div>
+          <div class="text-white/80 text-sm">Создаём уютные пространства из качественных материалов</div>
+        </div>
       </div>
-      <button type="submit" class="px-5 py-3 rounded-md btn-primary">Отправить</button>
-      <a href="https://wa.me/{{ whatsapp_number|replace('+','') }}?text={{ 'Здравствуйте! Хочу заказать мебель.'|urlencode }}" target="_blank" class="text-sm text-brand hover:underline">написать в WhatsApp</a>
-    </form>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="rounded-lg overflow-hidden shadow">
+          <img src="{{ url_for('static', filename='img/reviews/feedback-1.jpg') }}" alt="Пример 1" class="w-full h-36 object-cover">
+        </div>
+        <div class="rounded-lg overflow-hidden shadow">
+          <img src="{{ url_for('static', filename='img/reviews/feedback-2.jpg') }}" alt="Пример 2" class="w-full h-36 object-cover">
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- CTA Modals (kept at end) -->
+  <div id="modal-catalog" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 p-4">
+    <div class="w-full max-w-4xl rounded bg-white/60 backdrop-blur-sm p-4 md:p-6 shadow">
+      <div class="flex items-center justify-between">
+        <h3 id="modal-catalog-title" class="text-lg font-semibold">Варианты</h3>
+        <button type="button" class="p-2" data-close-modal>✕</button>
+      </div>
+      <div id="modal-catalog-grid" class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+      <div class="mt-6 flex justify-end">
+        <a href="{{ instagram_url }}" target="_blank" rel="noopener" aria-label="Заказать"
+           class="px-5 py-3 rounded-md text-white shadow transition hover:opacity-90 bg-brand">
+          Заказать
+        </a>
+      </div>
+    </div>
+  </div>
   <div id="modal-callback" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
     <div class="w-full max-w-md rounded bg-white p-6 shadow">
       <div class="flex items-center justify-between">
@@ -390,5 +524,52 @@
       <img src="" alt="" class="max-h-[80vh] w-auto h-auto rounded shadow-lg">
     </div>
   </div>
+
+  <script>
+    (function(){
+      var sets = {
+        kitchen: [
+          {src: "{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}", alt: "Кухня 1"},
+          {src: "{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}", alt: "Кухня 2"},
+          {src: "{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}", alt: "Кухня 3"}
+        ],
+        wardrobe: [
+          {src: "{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}", alt: "Шкаф 1"},
+          {src: "{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-2.jpg') }}", alt: "Шкаф 2"},
+          {src: "{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-3.jpg') }}", alt: "Шкаф 3"}
+        ],
+        office: [
+          {src: "{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}", alt: "Офис 1"},
+          {src: "{{ url_for('static', filename='img/catalog/office/office-2.jpg') }}", alt: "Офис 2"},
+          {src: "{{ url_for('static', filename='img/catalog/office/office-3.jpg') }}", alt: "Офис 3"}
+        ]
+      };
+      var grid = document.getElementById('modal-catalog-grid');
+      var title = document.getElementById('modal-catalog-title');
+      document.addEventListener('click', function(e){
+        var el = e.target.closest('[data-open-modal="#modal-catalog"][data-category]');
+        if(!el) return;
+        var cat = el.getAttribute('data-category');
+        var list = sets[cat] || [];
+        title.textContent = cat === 'kitchen' ? 'Кухни' : (cat === 'wardrobe' ? 'Шкафы' : 'Офисная мебель');
+        grid.innerHTML = '';
+        for(var i=0;i<list.length;i++){
+          var it = list[i];
+          var a = document.createElement('a');
+          a.href = it.src;
+          a.setAttribute('data-open-modal', '#modal-photo');
+          a.setAttribute('data-photo', it.src);
+          a.setAttribute('data-alt', it.alt || '');
+          a.className = 'block rounded overflow-hidden shadow';
+          var img = document.createElement('img');
+          img.src = it.src;
+          img.alt = it.alt || '';
+          img.className = 'w-full h-48 object-cover';
+          a.appendChild(img);
+          grid.appendChild(a);
+        }
+      });
+    })();
+  </script>
 
   {% endblock %}
