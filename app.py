@@ -96,6 +96,12 @@ def index():
     )
 
 
+# Backward-compat for a common typo: /admin/logim -> /admin/login
+@app.route('/admin/logim')
+def admin_logim_typo():
+    return redirect(url_for('admin_login'))
+
+
 _db_inited = False
 
 @app.before_request
