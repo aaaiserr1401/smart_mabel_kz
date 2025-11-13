@@ -55,6 +55,9 @@ def init_db():
                 );
                 """
             )
+            # Helpful indexes for admin listing
+            conn.execute("CREATE INDEX IF NOT EXISTS leads_created_at_idx ON leads (created_at DESC)")
+            conn.execute("CREATE INDEX IF NOT EXISTS leads_status_idx ON leads (status)")
         conn.close()
         return
     conn = get_db()
@@ -72,6 +75,12 @@ def init_db():
         );
         """
     )
+    # Helpful indexes for admin listing
+    try:
+        conn.execute("CREATE INDEX IF NOT EXISTS leads_created_at_idx ON leads (created_at DESC)")
+        conn.execute("CREATE INDEX IF NOT EXISTS leads_status_idx ON leads (status)")
+    except Exception:
+        pass
     conn.commit()
     conn.close()
 
