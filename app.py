@@ -95,9 +95,10 @@ def _ensure_db_once():
     if not _db_inited:
         try:
             init_db()
+            _db_inited = True
         except Exception:
+            # keep _db_inited as False to retry on next request
             pass
-        _db_inited = True
 
 
 @app.route('/lead', methods=['POST'])
