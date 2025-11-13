@@ -102,6 +102,58 @@ def admin_logim_typo():
     return redirect(url_for('admin_login'))
 
 
+@app.route('/health')
+def health():
+    return Response('ok', mimetype='text/plain')
+
+
+@app.route('/dbcheck')
+def dbcheck():
+    try:
+        conn = get_db()
+        if DATABASE_URL:
+            with conn:
+                conn.execute('SELECT 1')
+                conn.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS leads (
+                        id SERIAL PRIMARY KEY,
+                        name TEXT NOT NULL,
+                        phone TEXT NOT NULL,
+                        comment TEXT,
+                        utm TEXT,
+                        referrer TEXT,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        status TEXT DEFAULT 'new'
+                    );
+                    """
+                )
+        else:
+            conn.execute('SELECT 1')
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS leads (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    phone TEXT NOT NULL,
+                    comment TEXT,
+                    utm TEXT,
+                    referrer TEXT,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    status TEXT DEFAULT 'new'
+                );
+                """
+            )
+            conn.commit()
+        try:
+            conn.close()
+        except Exception:
+            pass
+        return Response('db ok', mimetype='text/plain')
+    except Exception as e:
+        return Response(f'db error: {e}', status=500, mimetype='text/plain')
+
+
 _db_inited = False
 
 @app.before_request
