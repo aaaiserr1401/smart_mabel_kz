@@ -7,6 +7,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 import requests
 import psycopg
 from psycopg.rows import dict_row
+from flask_compress import Compress
 
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / '.env')
@@ -14,6 +15,9 @@ DB_PATH = BASE_DIR / 'site.db'
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 app = Flask(__name__)
+# Enable browser caching for static files (1 day) and gzip compression for responses
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 86400
+Compress(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key')
 app.config['WHATSAPP_NUMBER'] = '+77016751231'
 app.config['INSTAGRAM_HANDLE'] = 'smart_mabel_kz'
@@ -26,7 +30,19 @@ def get_db():
     if DATABASE_URL:
         dsn = DATABASE_URL
         try:
-            if 'railway.internal' in dsn and 'sslmode=' not in dsn:
+            # Ensure proper SSL for external Postgres (e.g., Supabase)
+            if 'sslmode=' not in dsn:
+                dsn = dsn + ('&sslmode=require' if '?' in dsn else '?sslmode=require')
+            # Fast fail on slow networks
+            if 'connect_timeout=' not in dsn:
+                dsn = dsn + ('&connect_timeout=5' if '?' in dsn else '?connect_timeout=5')
+            # Avoid long-running queries in admin list/export
+            if 'options=' not in dsn:
+                dsn = dsn + ('&options=-c%20statement_timeout=5000' if '?' in dsn else '?options=-c%20statement_timeout=5000')
+            if 'application_name=' not in dsn:
+                dsn = dsn + ('&application_name=smart-mebel' if '?' in dsn else '?application_name=smart-mebel')
+            # Special-case Railway internal if used locally
+            if 'railway.internal' in dsn and 'sslmode=disable' not in dsn:
                 dsn = dsn + ('&sslmode=disable' if '?' in dsn else '?sslmode=disable')
         except Exception:
             pass
