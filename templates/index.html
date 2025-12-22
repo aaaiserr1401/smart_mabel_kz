@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
   <!-- Hero -->
-  <section class="relative overflow-hidden zone">
+  <section class="relative overflow-hidden zone zone-no-line">
     <div class="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-4 items-center">
       <div class="relative z-10 md:-mr-16">
         <h1 class="text-3xl md:text-5xl font-bold leading-tight">Мебель на заказ под ваш интерьер</h1>
@@ -69,113 +69,140 @@
       }, 3500);
     })();
   </script>
-  <!-- About & Advantages -->
-  <section id="about" class="container mx-auto px-4 py-16 zone">
-    <div class="text-center max-w-3xl mx-auto">
-      <h2 class="text-2xl md:text-3xl font-semibold">Выполним заказ любой сложности из 18 видов материалов</h2>
-      <div class="mt-2 text-slate-600">(от ЛДСП до массива из дерева)</div>
+  <!-- Completed Projects -->
+  <section id="projects" class="container mx-auto px-4 py-16 md:py-20 zone">
+    <h2 class="text-2xl md:text-3xl font-extrabold text-center">Реализованные проекты под ключ от идеи до установки</h2>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" data-alt="Проект 1">
+          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" alt="Проект 1" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" data-alt="Проект 2">
+          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" alt="Проект 2" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" data-alt="Проект 3">
+          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" alt="Проект 3" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" data-alt="Проект 4">
+          <img src="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" alt="Проект 4" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" data-alt="Проект 5">
+          <img src="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" alt="Проект 5" class="w-full h-full object-cover">
+        </a>
+      </div></div>
+      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
+        <a href="{{ url_for('static', filename='img/projects/project-6.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/projects/project-6.jpg') }}" data-alt="Проект: белая угловая кухня">
+          <img src="{{ url_for('static', filename='img/projects/project-6.jpg') }}" alt="Проект: белая угловая кухня" class="w-full h-full object-cover">
+        </a>
+      </div></div>
     </div>
-    <div class="mt-8 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
-      <div class="p-4 border rounded text-center">
-        <div class="flex justify-center mb-2 text-brand">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <div class="text-sm">Более <span class="font-semibold">2000</span> фактур и цветов</div>
-      </div>
-      <div class="p-4 border rounded text-center">
-        <div class="flex justify-center mb-2 text-brand">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l-3-3m0 0l3-3m-3 3h10M5 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="text-sm">Услуги дизайнера <span class="font-semibold">бесплатно</span></div>
-      </div>
-      <div class="p-4 border rounded text-center">
-        <div class="flex justify-center mb-2 text-brand">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 7h8M6 11h12M4 15h16M10 19h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <div class="text-sm">Установка под ключ <span class="font-semibold">5–30</span> раб. дней</div>
-      </div>
-      <div class="p-4 border rounded text-center">
-        <div class="flex justify-center mb-2 text-brand">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 16l3-3 4 4 8-8 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="text-sm">Доставка, подъём и сборка <span class="font-semibold">бесплатно</span></div>
-      </div>
-      <div class="p-4 border rounded text-center col-span-2 md:col-span-1">
-        <div class="flex justify-center mb-2 text-brand">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="text-sm">Расширенная гарантия <span class="font-semibold">2 года</span></div>
-      </div>
-    </div>
-    <div class="mt-8 text-center">
-      <button class="btn-cta" data-open-modal="#modal-consult" data-product="Подбор материала">Подобрать материал под ваш бюджет</button>
-    </div>
-  </section>
-
-  <!-- Workshop Overview -->
-  <section id="workshop" class="container mx-auto px-4 py-16 md:py-20 zone">
-    <h2 class="text-2xl md:text-3xl font-semibold">Обзор цеха</h2>
-    <div class="mt-6 grid md:grid-cols-2 gap-8">
-      <div>
-        <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
-          <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
-            <source src="{{ url_for('static', filename='video/overviews/overview-1.mp4') }}" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-          </video>
-        </div>
-        <div class="mt-2 text-sm text-slate-600">
-          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="{{ url_for('static', filename='video/overviews/overview-1.mp4') }}">Скачать MP4</a>
-        </div>
-      </div>
-      <div>
-        <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
-          <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
-            <source src="{{ url_for('static', filename='video/overviews/overview-2.mp4') }}" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-          </video>
-        </div>
-        <div class="mt-2 text-sm text-slate-600">
-          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="{{ url_for('static', filename='video/overviews/overview-2.mp4') }}">Скачать MP4</a>
-        </div>
-      </div>
+    <div class="mt-6 text-center">
+      <button type="button" class="text-brand font-semibold hover:underline" data-open-modal="#modal-quote" data-comment="Получить расчёт похожего проекта">Получить расчёт похожего проекта</button>
     </div>
   </section>
 
   <!-- Trust / Clients -->
   <section id="trust" class="container mx-auto px-4 py-12 zone zone-alt">
-    <div class="grid md:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 class="text-2xl font-semibold">Нам доверяют</h2>
-        <ul class="mt-4 space-y-2 text-slate-700">
-          <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Работаем с 2012 года</span></li>
-          <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Имеем всю необходимую документацию</span></li>
-          <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Команда из 30 мастеров мебели</span></li>
-          <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Производство полного цикла, все необходимые станки</span></li>
-        </ul>
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-center">Нам доверяют бизнесы и частные клиенты</h2>
+      <ul class="mt-6 space-y-2 text-slate-700 max-w-3xl mx-auto">
+        <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>13 лет опыта - знаем, как реализовать сложные проекты без переделок</span></li>
+        <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Официальная работа и договор - прозрачные сроки и гарантия</span></li>
+        <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Команда из 30 мастеров — соблюдаем сроки даже на больших объектах</span></li>
+        <li class="flex items-start gap-2"><span class="text-emerald-600">✓</span><span>Собственное производство полного цикла — контроль качества и честная цена</span></li>
+      </ul>
+      <div class="mt-8 flex flex-wrap gap-4 justify-center">
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-28 basis-[calc(50%-0.5rem)] sm:basis-[calc(33.333%-0.75rem)]"><img class="max-h-16 md:max-h-20 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-1.png') }}" alt="logo 1" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-28 basis-[calc(50%-0.5rem)] sm:basis-[calc(33.333%-0.75rem)]"><img class="max-h-16 md:max-h-20 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-2.png') }}" alt="logo 2" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-28 basis-[calc(50%-0.5rem)] sm:basis-[calc(33.333%-0.75rem)]"><img class="max-h-16 md:max-h-20 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-3.png') }}" alt="logo 3" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-28 basis-[calc(50%-0.5rem)] sm:basis-[calc(33.333%-0.75rem)]"><img class="max-h-16 md:max-h-20 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-4.png') }}" alt="logo 4" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-28 basis-[calc(50%-0.5rem)] sm:basis-[calc(33.333%-0.75rem)]"><img class="max-h-16 md:max-h-20 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-5.png') }}" alt="logo 5" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+        <div class="border rounded-lg bg-white p-6 grid place-items-center h-28 basis-[calc(50%-0.5rem)] sm:basis-[calc(33.333%-0.75rem)]"><img class="max-h-16 md:max-h-20 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-6.png') }}" alt="logo 6" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
-        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-1.png') }}" alt="logo 1" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
-        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-2.png') }}" alt="logo 2" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
-        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-3.png') }}" alt="logo 3" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
-        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-4.png') }}" alt="logo 4" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
-        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-5.png') }}" alt="logo 5" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
-        <div class="border rounded-lg bg-white p-6 grid place-items-center h-32"><img class="max-h-20 md:max-h-24 w-auto object-contain opacity-90" loading="lazy" src="{{ url_for('static', filename='img/trust/logo-6.png') }}" alt="logo 6" onerror="if(!this.dataset.e1){this.dataset.e1=1;this.src=this.src.replace('.png','.jpg');}else if(!this.dataset.e2){this.dataset.e2=1;this.src=this.src.replace('.jpg','.jpeg');}else if(!this.dataset.e3){this.dataset.e3=1;this.src=this.src.replace(/\.(png|jpe?g)$/i,'.webp');}else if(!this.dataset.e4){this.dataset.e4=1;this.src=this.src.replace(/\.(png|jpe?g|webp)$/i,'.avif');}else{this.onerror=null;this.src='https://dummyimage.com/180x60/eff2f6/7c8aa5&text=LOGO';}"></div>
+    </div>
+  </section>
+
+  <!-- About & Advantages -->
+  <section id="about" class="container mx-auto px-4 py-16 zone">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight text-center">ИЗГОТОВИМ МЕБЕЛЬ ПОД ВАШ БЮДЖЕТ И ЗАДАЧИ</h2>
+      <div class="mt-2 text-sm text-slate-600">18 видов материалов- от ЛДСП до массива</div>
+    </div>
+    <div class="mt-8 grid md:grid-cols-2 gap-4 md:gap-6">
+      <div class="p-5 border rounded-lg bg-white">
+        <div class="flex items-start gap-3">
+          <div class="shrink-0 text-brand mt-0.5">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold">Бесплатный дизайн‑проект</div>
+            <div class="text-sm text-slate-600">Под ваши размеры и стиль, с учётом бюджета</div>
+          </div>
+        </div>
       </div>
+      <div class="p-5 border rounded-lg bg-white">
+        <div class="flex items-start gap-3">
+          <div class="shrink-0 text-brand mt-0.5">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold">Сроки от 5 до 30 рабочих дней</div>
+            <div class="text-sm text-slate-600">Фиксируем в договоре</div>
+          </div>
+        </div>
+      </div>
+      <div class="p-5 border rounded-lg bg-white">
+        <div class="flex items-start gap-3">
+          <div class="shrink-0 text-brand mt-0.5">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h13v10H3V7Z" stroke="currentColor" stroke-width="2"/><path d="M16 10h3l2 2v5h-5v-7Z" stroke="currentColor" stroke-width="2"/><path d="M7 19a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor"/><path d="M18 19a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold">Доставка, подъём и сборка - бесплатно</div>
+            <div class="text-sm text-slate-600">Без скрытых доплат</div>
+          </div>
+        </div>
+      </div>
+      <div class="p-5 border rounded-lg bg-white">
+        <div class="flex items-start gap-3">
+          <div class="shrink-0 text-brand mt-0.5">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l7 4v6c0 5-3 9-7 10C8 21 5 17 5 12V6l7-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold">Гарантия до 2 лет</div>
+            <div class="text-sm text-slate-600">Официально по договору</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 text-center">
+      <button class="btn-cta" data-open-modal="#modal-quote" data-comment="Рассчитать стоимость">Рассчитать стоимость</button>
     </div>
   </section>
 
   <!-- Catalog (3 categories) -->
   <section id="catalog" class="container mx-auto px-4 py-12 zone zone-alt">
-    <h2 class="text-2xl font-semibold">Каталог</h2>
+    <h2 class="text-2xl md:text-3xl font-extrabold text-center">Что мы изготавливаем</h2>
     <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="catalog-grid">
       <div>
         <div class="cat-card" role="button" tabindex="0" data-open-modal="#modal-catalog" data-category="kitchen">
           <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}');"></span>
           <div class="cat-overlay">
-            <div class="cat-title">Кухни</div>
-            <div class="cat-sub">Цена по запросу</div>
-            <div class="mt-4">
-              <button class="btn-cta" data-open-modal="#modal-consult" data-product="Кухни">Получить консультацию!</button>
+            <div class="cat-title">Кухни на заказ</div>
+            <div class="mt-3 w-16 h-px bg-white/70"></div>
+            <div class="mt-3 cat-sub">Для квартир, домов и студий</div>
+            <div class="mt-5">
+              <button class="btn-cta" data-open-modal="#modal-quote" data-comment="Рассчитать кухню">Рассчитать кухню</button>
+            </div>
+            <div class="mt-4 text-sm opacity-95 text-center">
+              → Бесплатный дизайн
             </div>
           </div>
         </div>
@@ -184,10 +211,14 @@
         <div class="cat-card" role="button" tabindex="0" data-open-modal="#modal-catalog" data-category="wardrobe">
           <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}');"></span>
           <div class="cat-overlay">
-            <div class="cat-title">Шкафы</div>
-            <div class="cat-sub">Цена по запросу</div>
-            <div class="mt-4">
-              <button class="btn-cta" data-open-modal="#modal-consult" data-product="Шкафы">Получить консультацию!</button>
+            <div class="cat-title">Шкафы и гардеробные</div>
+            <div class="mt-3 w-16 h-px bg-white/70"></div>
+            <div class="mt-3 cat-sub">Встроенные и корпусные</div>
+            <div class="mt-5">
+              <button class="btn-cta" data-open-modal="#modal-quote" data-comment="Подобрать шкаф">Подобрать шкаф</button>
+            </div>
+            <div class="mt-4 text-sm opacity-95 text-center">
+              → Производство в Алматы
             </div>
           </div>
         </div>
@@ -196,17 +227,20 @@
         <div class="cat-card" role="button" tabindex="0" data-open-modal="#modal-catalog" data-category="office">
           <span class="cat-bg" style="background-image:url('{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}');"></span>
           <div class="cat-overlay">
-            <div class="cat-title">Офисная мебель</div>
-            <div class="cat-sub">Цена по запросу</div>
-            <div class="mt-4">
-              <button class="btn-cta" data-open-modal="#modal-consult" data-product="Офисная мебель">Получить консультацию!</button>
+            <div class="cat-title">Офисная мебель под ключ</div>
+            <div class="mt-3 w-16 h-px bg-white/70"></div>
+            <div class="mt-3 cat-sub">Для бизнеса и коммерческих объектов</div>
+            <div class="mt-5">
+              <button class="btn-cta" data-open-modal="#modal-quote" data-comment="Рассчитать проект">Рассчитать проект</button>
+            </div>
+            <div class="mt-4 text-sm opacity-95 text-center">
+              → Сроки от 5 дней
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
   <!-- Before / After -->
   <section id="beforeafter" class="container mx-auto px-4 py-16 md:py-20 zone">
     <div class="grid md:grid-cols-2 gap-8 items-start">
@@ -241,71 +275,56 @@
     </div>
   </section>
 
-  <!-- Video -->
-  <section id="video" class="container mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
-        <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
-          <source src="{{ url_for('static', filename='video/insta/reel-1.mp4') }}" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
+  <!-- Workshop Overview -->
+  <section id="workshop" class="container mx-auto px-4 py-16 md:py-20 zone">
+    <h2 class="text-2xl md:text-3xl font-semibold">Обзор цеха</h2>
+    <div class="mt-6 grid md:grid-cols-2 gap-8">
+      <div>
+        <div class="video-portrait">
+          <video controls preload="none" playsinline>
+            <source src="{{ url_for('static', filename='video/overviews/overview-1.mp4') }}" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+        </div>
+        <div class="mt-2 text-sm text-slate-600">
+          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="{{ url_for('static', filename='video/overviews/overview-1.mp4') }}">Скачать MP4</a>
+        </div>
       </div>
-      <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
-        <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
-          <source src="{{ url_for('static', filename='video/insta/reel-2.mp4') }}" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
-      </div>
-      <div class="rounded-lg overflow-hidden shadow bg-black" style="aspect-ratio: 9 / 16; max-height:80vh; margin:0 auto;">
-        <video class="w-full h-full object-cover" controls preload="metadata" playsinline>
-          <source src="{{ url_for('static', filename='video/insta/reel-3.mp4') }}" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
+      <div>
+        <div class="video-portrait">
+          <video controls preload="none" playsinline>
+            <source src="{{ url_for('static', filename='video/overviews/overview-2.mp4') }}" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+        </div>
+        <div class="mt-2 text-sm text-slate-600">
+          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="{{ url_for('static', filename='video/overviews/overview-2.mp4') }}">Скачать MP4</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Reviews (slider) -->
-  <!-- Completed Projects -->
-  <section id="projects" class="container mx-auto px-4 py-16 md:py-20 zone">
-    <h2 class="text-2xl font-semibold">Выполненные проекты</h2>
-    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
-        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" data-alt="Проект 1">
-          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-2.jpg') }}" alt="Проект 1" class="w-full h-full object-cover">
-        </a>
-      </div></div>
-      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
-        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" data-alt="Проект 2">
-          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-3.jpg') }}" alt="Проект 2" class="w-full h-full object-cover">
-        </a>
-      </div></div>
-      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
-        <a href="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" data-alt="Проект 3">
-          <img src="{{ url_for('static', filename='img/catalog/kitchen/kitchen-5.jpg') }}" alt="Проект 3" class="w-full h-full object-cover">
-        </a>
-      </div></div>
-      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
-        <a href="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" data-alt="Проект 4">
-          <img src="{{ url_for('static', filename='img/catalog/wardrobe/wardrobe-1.jpg') }}" alt="Проект 4" class="w-full h-full object-cover">
-        </a>
-      </div></div>
-      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
-        <a href="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" data-alt="Проект 5">
-          <img src="{{ url_for('static', filename='img/catalog/office/office-1.jpg') }}" alt="Проект 5" class="w-full h-full object-cover">
-        </a>
-      </div></div>
-      <div class="rounded overflow-hidden shadow-sm"><div class="aspect-video overflow-hidden">
-        <a href="{{ url_for('static', filename='img/projects/project-6.jpg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/projects/project-6.jpg') }}" data-alt="Проект: белая угловая кухня">
-          <img src="{{ url_for('static', filename='img/projects/project-6.jpg') }}" alt="Проект: белая угловая кухня" class="w-full h-full object-cover">
-        </a>
-      </div></div>
-    </div>
-    <div class="mt-4 text-center text-slate-600 text-sm">
-      Ещё больше информации по 
-      <a class="text-brand hover:underline" href="{{ url_for('static', filename='docs/gallery.pdf') }}" target="_blank" rel="noopener">ссылке</a>
-      или в 
-      <a class="text-brand hover:underline" href="{{ instagram_url }}" target="_blank" rel="noopener">Instagram</a>
+  <!-- Video -->
+  <section id="video" class="container mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="video-portrait">
+        <video controls preload="none" playsinline>
+          <source src="{{ url_for('static', filename='video/insta/reel-1.mp4') }}" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
+      <div class="video-portrait">
+        <video controls preload="none" playsinline>
+          <source src="{{ url_for('static', filename='video/insta/reel-2.mp4') }}" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
+      <div class="video-portrait">
+        <video controls preload="none" playsinline>
+          <source src="{{ url_for('static', filename='video/insta/reel-3.mp4') }}" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
     </div>
   </section>
 
@@ -317,7 +336,7 @@
         <div class="swiper-wrapper">
         <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
           <div class="rounded-lg overflow-hidden shadow relative bg-black">
-            <video class="w-full h-auto object-contain" style="max-height:70vh" controls preload="metadata" playsinline>
+            <video class="w-full h-auto object-contain video-review" controls preload="none" playsinline>
               <source src="{{ url_for('static', filename='video/reviews/review-1.mp4') }}" type="video/mp4">
               Ваш браузер не поддерживает видео.
             </video>
@@ -325,7 +344,7 @@
         </div>
         <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
           <div class="rounded-lg overflow-hidden shadow relative bg-black">
-            <video class="w-full h-auto object-contain" style="max-height:70vh" controls preload="metadata" playsinline>
+            <video class="w-full h-auto object-contain video-review" controls preload="none" playsinline>
               <source src="{{ url_for('static', filename='video/reviews/review-2.mp4') }}" type="video/mp4">
               Ваш браузер не поддерживает видео.
             </video>
@@ -333,7 +352,7 @@
         </div>
         <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
           <div class="rounded-lg overflow-hidden shadow relative bg-black">
-            <video class="w-full h-auto object-contain" style="max-height:70vh" controls preload="metadata" playsinline>
+            <video class="w-full h-auto object-contain video-review" controls preload="none" playsinline>
               <source src="{{ url_for('static', filename='video/reviews/review-3.mp4') }}" type="video/mp4">
               Ваш браузер не поддерживает видео.
             </video>
@@ -341,7 +360,7 @@
         </div>
         <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
           <div class="rounded-lg overflow-hidden shadow relative bg-black">
-            <video class="w-full h-auto object-contain" style="max-height:70vh" controls preload="metadata" playsinline>
+            <video class="w-full h-auto object-contain video-review" controls preload="none" playsinline>
               <source src="{{ url_for('static', filename='video/reviews/review-4.mp4') }}" type="video/mp4">
               Ваш браузер не поддерживает видео.
             </video>
