@@ -245,85 +245,71 @@
   <section id="beforeafter" class="container mx-auto px-4 py-16 md:py-20 zone">
     <div class="grid md:grid-cols-2 gap-8 items-start">
       <div>
-        <h2 class="text-2xl md:text-3xl font-semibold">Дарим профессиональный 3D‑эскиз бесплатно</h2>
+        <h2 class="text-2xl md:text-3xl font-semibold">Вы увидите свою будущую кухню ДО заказа - БЕСПЛАТНО</h2>
         <div class="mt-4 text-slate-700 space-y-2">
-          <div>Разработаем рабочий чертёж от "А" до "Я"</div>
-          <div class="text-slate-600">Плюс получите:</div>
-          <ul class="list-disc pl-5 text-slate-600 space-y-1">
-            <li>полный расчёт стоимости кухни по вашим параметрам;</li>
-            <li>советы по материалам, чтобы сэкономить без потери качества;</li>
-          </ul>
+          <div>Узнаете точную цену кухни — без сюрпризов</div>
+          <div>Подскажем, где можно сэкономить</div>
+          <div class="text-slate-600">до 20-30% без потери качества</div>
+          <div>Проект под ваши реальные размеры, а не "примерный"</div>
         </div>
         <div class="mt-6">
-          <button type="button" data-open-modal="#modal-consult" class="btn-primary-glow">Получить 3D бесплатно</button>
+          <button type="button" data-open-modal="#modal-quote" data-comment="Рассчитать свою кухню 3D" class="btn-primary-glow">Рассчитать свою кухню 3D</button>
+          <div class="mt-2 text-sm text-slate-500">Займет 10-15 минут</div>
         </div>
       </div>
-      <div class="grid gap-2 sm:grid-cols-2 min-w-0">
-        <div class="relative before-after">
+      <div class="min-w-0">
+        <div class="relative before-after" style="height:520px">
           <img src="{{ url_for('static', filename='img/before/before-1.jpg') }}" alt="before" class="w-full h-full object-cover rounded">
           <img src="{{ url_for('static', filename='img/after/after-1.jpg') }}" alt="after" class="w-full h-full object-cover rounded" data-after>
           <span class="ba-badge before">До</span>
           <span class="ba-badge after">После</span>
         </div>
-        <div class="relative before-after">
-          <img src="{{ url_for('static', filename='img/before/before-2.jpg') }}" alt="before" class="w-full h-full object-cover rounded">
-          <img src="{{ url_for('static', filename='img/after/after-2.jpg') }}" alt="after" class="w-full h-full object-cover rounded" data-after>
-          <span class="ba-badge before">До</span>
-          <span class="ba-badge after">После</span>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- Workshop Overview -->
-  <section id="workshop" class="container mx-auto px-4 py-16 md:py-20 zone">
-    <h2 class="text-2xl md:text-3xl font-semibold">Обзор цеха</h2>
-    <div class="mt-6 grid md:grid-cols-2 gap-8">
-      <div>
-        <div class="video-portrait">
-          <video controls preload="none" playsinline>
-            <source src="{{ url_for('static', filename='video/overviews/overview-1.mp4') }}" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-          </video>
-        </div>
-        <div class="mt-2 text-sm text-slate-600">
-          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="{{ url_for('static', filename='video/overviews/overview-1.mp4') }}">Скачать MP4</a>
-        </div>
-      </div>
-      <div>
-        <div class="video-portrait">
-          <video controls preload="none" playsinline>
-            <source src="{{ url_for('static', filename='video/overviews/overview-2.mp4') }}" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-          </video>
-        </div>
-        <div class="mt-2 text-sm text-slate-600">
-          Видео не загружается? <a class="underline" target="_blank" rel="noopener" href="{{ url_for('static', filename='video/overviews/overview-2.mp4') }}">Скачать MP4</a>
-        </div>
-      </div>
+  <!-- Gallery -->
+  <section id="gallery" class="py-12 zone zone-alt">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl font-semibold">Галерея</h2>
     </div>
-  </section>
-
-  <!-- Video -->
-  <section id="video" class="container mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="video-portrait">
-        <video controls preload="none" playsinline>
-          <source src="{{ url_for('static', filename='video/insta/reel-1.mp4') }}" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
-      </div>
-      <div class="video-portrait">
-        <video controls preload="none" playsinline>
-          <source src="{{ url_for('static', filename='video/insta/reel-2.mp4') }}" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
-      </div>
-      <div class="video-portrait">
-        <video controls preload="none" playsinline>
-          <source src="{{ url_for('static', filename='video/insta/reel-3.mp4') }}" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
+    <div class="mt-6">
+      <div id="gallery-swiper" class="swiper w-full bg-black">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="{{ url_for('static', filename='img/gallery/gallery-1.jpg.jpeg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/gallery/gallery-1.jpg.jpeg') }}" data-alt="Галерея 1">
+              <img src="{{ url_for('static', filename='img/gallery/gallery-1.jpg.jpeg') }}" alt="Галерея 1" class="w-full h-full object-contain md:object-cover" />
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="{{ url_for('static', filename='img/gallery/gallery-2.jpeg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/gallery/gallery-2.jpeg') }}" data-alt="Галерея 2">
+              <img loading="lazy" src="{{ url_for('static', filename='img/gallery/gallery-2.jpeg') }}" alt="Галерея 2" class="w-full h-full object-contain md:object-cover" />
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="{{ url_for('static', filename='img/gallery/gallery-3.jpeg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/gallery/gallery-3.jpeg') }}" data-alt="Галерея 3">
+              <img loading="lazy" src="{{ url_for('static', filename='img/gallery/gallery-3.jpeg') }}" alt="Галерея 3" class="w-full h-full object-contain md:object-cover" />
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="{{ url_for('static', filename='img/gallery/gallery-4.jpeg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/gallery/gallery-4.jpeg') }}" data-alt="Галерея 4">
+              <img loading="lazy" src="{{ url_for('static', filename='img/gallery/gallery-4.jpeg') }}" alt="Галерея 4" class="w-full h-full object-contain md:object-cover" />
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="{{ url_for('static', filename='img/gallery/gallery-5.jpeg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/gallery/gallery-5.jpeg') }}" data-alt="Галерея 5">
+              <img loading="lazy" src="{{ url_for('static', filename='img/gallery/gallery-5.jpeg') }}" alt="Галерея 5" class="w-full h-full object-contain md:object-cover" />
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="{{ url_for('static', filename='img/gallery/gallery-6.jpeg') }}" data-open-modal="#modal-photo" data-photo="{{ url_for('static', filename='img/gallery/gallery-6.jpeg') }}" data-alt="Галерея 6">
+              <img loading="lazy" src="{{ url_for('static', filename='img/gallery/gallery-6.jpeg') }}" alt="Галерея 6" class="w-full h-full object-contain md:object-cover" />
+            </a>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
     </div>
   </section>
@@ -332,42 +318,15 @@
   <section id="reviews" class="container mx-auto px-4 py-12 zone zone-alt">
     <h2 class="text-2xl font-semibold">Отзывы</h2>
     <div class="mt-6">
-      <div class="swiper" id="reviews-swiper">
-        <div class="swiper-wrapper">
-        <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
+      <div class="max-w-4xl mx-auto">
+        <div class="p-4 border rounded bg-white">
           <div class="rounded-lg overflow-hidden shadow relative bg-black">
-            <video class="w-full h-auto object-contain video-review" controls preload="none" playsinline>
-              <source src="{{ url_for('static', filename='video/reviews/review-1.mp4') }}" type="video/mp4">
-              Ваш браузер не поддерживает видео.
-            </video>
-          </div>
-        </div>
-        <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
-          <div class="rounded-lg overflow-hidden shadow relative bg-black">
-            <video class="w-full h-auto object-contain video-review" controls preload="none" playsinline>
-              <source src="{{ url_for('static', filename='video/reviews/review-2.mp4') }}" type="video/mp4">
-              Ваш браузер не поддерживает видео.
-            </video>
-          </div>
-        </div>
-        <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
-          <div class="rounded-lg overflow-hidden shadow relative bg-black">
-            <video class="w-full h-auto object-contain video-review" controls preload="none" playsinline>
-              <source src="{{ url_for('static', filename='video/reviews/review-3.mp4') }}" type="video/mp4">
-              Ваш браузер не поддерживает видео.
-            </video>
-          </div>
-        </div>
-        <div class="swiper-slide swiper-no-swiping p-4 border rounded bg-white">
-          <div class="rounded-lg overflow-hidden shadow relative bg-black">
-            <video class="w-full h-auto object-contain video-review" controls preload="none" playsinline>
+            <video class="w-full h-auto object-contain video-review" controls preload="auto" playsinline autoplay muted loop>
               <source src="{{ url_for('static', filename='video/reviews/review-4.mp4') }}" type="video/mp4">
               Ваш браузер не поддерживает видео.
             </video>
           </div>
         </div>
-        </div>
-        <div class="swiper-pagination"></div>
       </div>
     </div>
   </section>

@@ -283,6 +283,26 @@ document.addEventListener('DOMContentLoaded', () => {
           img.addEventListener('error', () => heroSwiper.update());
         });
       }
+
+      const galleryEl = document.querySelector('#gallery-swiper');
+      if (galleryEl) {
+        new Swiper(galleryEl, {
+          loop: true,
+          slidesPerView: 1,
+          spaceBetween: 0,
+          preloadImages: true,
+          updateOnImagesReady: true,
+          observer: true,
+          observeParents: true,
+          pagination: { el: galleryEl.querySelector('.swiper-pagination'), clickable: true },
+          navigation: {
+            nextEl: galleryEl.querySelector('.swiper-button-next'),
+            prevEl: galleryEl.querySelector('.swiper-button-prev'),
+          },
+          keyboard: { enabled: true },
+        });
+      }
+
       const revEl = document.querySelector('#reviews-swiper');
       let reviewsSwiper = null;
       function setupReviews(){
